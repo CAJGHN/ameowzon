@@ -1,186 +1,298 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ameowzon.com. Spend less. Smile more.</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-<style>
-.dropdown:hover .dropdown-menu {display:block;}
-.banner {transition: opacity 1s ease-in-out;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ameowzon.com. Spend less. Smile more. (고양이 쇼핑몰)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        .banner {transition: opacity 1s ease-in-out;}
+        .amazon-header {background-color: #131921;}
+        .amazon-nav {background-color: #232f3e;}
+        
+        #mainHeaderContainer {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            transform: translateY(0);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #topHeader {
+            z-index: 50;
+        }
+        
+        #mainHeaderContainer.hidden-up {
+            transform: translateY(-100%); 
+        }
+
+        #bottomNav {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            z-index: 40; 
+            transition: opacity 0.3s ease-in-out, visibility 0.3s, height 0.3s, padding 0.3s;
+        }
+        #bottomNav::-webkit-scrollbar {
+            display: none;
+        }
+        #bottomNav.hidden-down {
+            opacity: 0;
+            visibility: hidden;
+            height: 0; 
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        
+        .product-link, .category-card-link {
+            display: block;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body class="bg-gray-100 text-gray-900">
 
-<header class="bg-[#131921] text-white sticky top-0 z-50 shadow-md">
-    <div class="flex items-center p-3 gap-6">
-        <div class="text-2xl font-bold cursor-pointer select-none"
-             onclick="window.open('https://example.com','_blank')">Ameowzon</div>
+<div id="mainHeaderContainer">
 
-        <div class="hidden md:flex items-center cursor-pointer hover:text-gray-300"
-             id="locationDisplay" onclick="window.open('https://example.com','_blank')">
-            <i class="fa-solid fa-location-dot text-xl mr-2"></i>
-            <div class="leading-tight text-sm">
-                <div class="text-gray-300">Deliver to</div>
-                <div class="font-bold" id="countryName">Loading...</div>
+    <header id="topHeader" class="amazon-header text-white shadow-md">
+        <div class="flex items-center p-3 gap-6">
+            <a href="/" class="text-2xl font-bold cursor-pointer select-none">Ameowzon</a>
+
+            <div class="hidden md:flex items-center cursor-pointer border border-transparent hover:border-white p-1" id="locationDisplay">
+                <i class="fa-solid fa-map-pin text-xl mr-2"></i>
+                <div class="leading-tight text-sm">
+                    <div class="text-gray-300">Deliver to</div>
+                    <div class="font-bold" id="countryName">Loading...</div>
+                </div>
             </div>
-        </div>
 
-        <div class="flex-1 flex max-w-3xl">
-            <select class="hidden md:block p-2 bg-gray-100 text-black border-r rounded-l-md text-sm"
-                    onclick="window.open('https://example.com','_blank')">
-                <option>All</option>
-                <option>Electronics</option>
-                <option>Fashion</option>
-                <option>Home</option>
-                <option>Books</option>
-            </select>
-            <input type="text" placeholder="Search Ameowzon" class="flex-1 p-2 text-black focus:outline-none">
-            <button class="bg-yellow-400 px-4 rounded-r-md hover:bg-yellow-500 transition"
-                    onclick="window.open('https://example.com','_blank')">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-        </div>
+            <div class="flex-1 flex max-w-3xl">
+                <select class="hidden md:block p-2 bg-gray-100 text-black border-r rounded-l-md text-sm hover:bg-gray-200">
+                    <option>All Cats</option>
+                    <option>Cat Food</option>
+                    <option>Cat Toys</option>
+                    <option>Litter</option>
+                </select>
+                <input type="text" placeholder="Search Ameowzon" class="flex-1 p-2 text-black focus:outline-none focus:border-yellow-500">
+                <button class="bg-yellow-400 px-4 rounded-r-md hover:bg-yellow-500 transition">
+                    <i class="fa-solid fa-search text-[#131921]"></i>
+                </button>
+            </div>
 
-        <nav class="flex gap-6 text-sm">
-            <a href="javascript:void(0)" class="hover:text-yellow-400 leading-tight"
-               onclick="window.open('https://example.com','_blank')">
-                <div>Hello, sign in</div>
-                <div class="font-bold">Account & Lists</div>
-            </a>
-            <a href="javascript:void(0)" class="hover:text-yellow-400 leading-tight"
-               onclick="window.open('https://example.com','_blank')">
-                <div>Returns</div>
-                <div class="font-bold">& Orders</div>
-            </a>
-            <a href="javascript:void(0)" class="hover:text-yellow-400 text-xl flex items-center gap-1 font-bold"
-               onclick="window.open('https://example.com','_blank')">
-                <i class="fa-solid fa-cart-shopping text-2xl"></i>
-                <span class="text-sm">Cart</span>
-            </a>
-        </nav>
+            <nav class="flex gap-6 text-sm">
+                <a href="#" class="border border-transparent hover:border-white p-1 leading-tight">
+                    <div>Hello, sign in</div>
+                    <div class="font-bold">Account & Lists</div>
+                </a>
+                <a href="#" class="border border-transparent hover:border-white p-1 leading-tight">
+                    <div>Returns</div>
+                    <div class="font-bold">& Orders</div>
+                </a>
+                <a href="#" class="border border-transparent hover:border-white p-1 text-xl flex items-end gap-1 font-bold">
+                    <i class="fa-solid fa-shopping-bag text-2xl relative">
+                        <span id="cartCount" class="absolute -top-1 left-3 text-xs bg-yellow-400 text-black rounded-full w-4 h-4 flex items-center justify-center font-normal">0</span>
+                    </i>
+                    <span class="text-sm">Cart</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <div id="bottomNav" class="amazon-nav text-white text-sm p-2 px-4 flex gap-4 overflow-x-auto whitespace-nowrap">
+        <div class="cursor-pointer border border-transparent hover:border-white p-1"><i class="fa-solid fa-bars mr-1"></i>All</div>
+        <div class="cursor-pointer border border-transparent hover:border-white p-1">Black Friday</div>
+        <a href="https://www.ameowzon.com/Ameowzon-Video" class="cursor-pointer border border-transparent hover:border-white p-1">Prime Video</a>
+        <div class="cursor-pointer border border-transparent hover:border-white p-1">Registry</div>
+        <div class="cursor-pointer border border-transparent hover:border-white p-1">Gift Cards</div>
+        <div class="cursor-pointer border border-transparent hover:border-white p-1">Customer Service</div>
+        <div class="cursor-pointer border border-transparent hover:border-white p-1">Sell</div>
     </div>
 
-    <div class="bg-[#232f3e] text-white text-sm p-2 px-4 flex gap-6 overflow-x-auto whitespace-nowrap">
-        <div class="cursor-pointer hover:text-yellow-400"
-             onclick="window.open('https://example.com','_blank')">All</div>
-        <div class="cursor-pointer hover:text-yellow-400"
-             onclick="window.open('https://example.com','_blank')">Today's Deals</div>
-        <div class="cursor-pointer hover:text-yellow-400"
-             onclick="window.open('https://example.com','_blank')">Customer Service</div>
-        <div class="cursor-pointer hover:text-yellow-400"
-             onclick="window.open('https://example.com','_blank')">Registry</div>
-        <div class="cursor-pointer hover:text-yellow-400"
-             onclick="window.open('https://example.com','_blank')">Gift Cards</div>
-        <div class="cursor-pointer hover:text-yellow-400"
-             onclick="window.open('https://example.com','_blank')">Sell</div>
-    </div>
-</header>
-
-<div class="relative w-full h-[450px] overflow-hidden">
-    <div class="absolute inset-0 banner opacity-100"
-         style="background:url('https://pbs.twimg.com/media/G5xO8jQbQAAei_H?format=png&name=small') center/cover no-repeat"
-         onclick="window.open('https://example.com','_blank')"></div>
-    <div class="absolute inset-0 banner opacity-0"
-         style="background:url('https://pbs.twimg.com/media/G6C_duXWEAIiLCy?format=jpg&name=small') center/cover no-repeat"
-         onclick="window.open('https://example.com','_blank')"></div>
-    <div class="absolute inset-0 banner opacity-0"
-         style="background:url('https://pbs.twimg.com/media/G55EZYPWoAA29C5?format=jpg&name=small') center/cover no-repeat"
-         onclick="window.open('https://example.com','_blank')"></div>
-    <div class="absolute inset-0 banner opacity-0"
-         style="background:url('https://pbs.twimg.com/media/G5rgbyVXUAAG8wi?format=jpg&name=small') center/cover no-repeat"
-         onclick="window.open('https://example.com','_blank')"></div>
-
-    <button id="prevBanner" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black bg-opacity-40 p-3 text-white text-3xl"
-            onclick="window.open('https://example.com','_blank')">‹</button>
-    <button id="nextBanner" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black bg-opacity-40 p-3 text-white text-3xl"
-            onclick="window.open('https://example.com','_blank')">›</button>
 </div>
 
-<section class="px-6 py-6 -mt-24 relative z-20 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
 
-    <div class="bg-white p-4 shadow cursor-pointer hover:shadow-xl transition rounded-md"
-         onclick="window.open('https://example.com','_blank')">
-        <h2 class="font-bold mb-2">Electronics</h2>
+<div class="relative w-full h-[450px] overflow-hidden">
+    <div class="absolute inset-0 banner opacity-100" data-index="0"
+         style="background:url('https://pbs.twimg.com/media/G5xO8jQbQAAei_H?format=png&name=small') center/cover no-repeat"></div>
+    <div class="absolute inset-0 banner opacity-0" data-index="1"
+         style="background:url('https://pbs.twimg.com/media/G6C_duXWEAIiLCy?format=jpg&name=small') center/cover no-repeat"></div>
+    <div class="absolute inset-0 banner opacity-0" data-index="2"
+         style="background:url('https://pbs.twimg.com/media/G55EZYPWoAA29C5?format=jpg&name=small') center/cover no-repeat"></div>
+    <div class="absolute inset-0 banner opacity-0" data-index="3"
+         style="background:url('https://pbs.twimg.com/media/G5rgbyVXUAAG8wi?format=jpg&name=small') center/cover no-repeat"></div>
+
+    <button id="prevBanner" class="absolute left-0 top-0 h-full w-24 flex items-center justify-center text-white text-5xl bg-black bg-opacity-20 hover:bg-opacity-40 transition z-10">‹</button>
+    <button id="nextBanner" class="absolute right-0 top-0 h-full w-24 flex items-center justify-center text-white text-5xl bg-black bg-opacity-20 hover:bg-opacity-40 transition z-10">›</button>
+</div>
+
+<section class="px-6 py-6 relative z-20 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-4">
+
+    <a href="https://example.com" target="_blank" class="category-card-link bg-white p-4 shadow hover:shadow-xl transition rounded-md">
+        <h2 class="font-bold mb-2">Pawsome Cat Food</h2>
         <img src="https://pbs.twimg.com/media/G6SKfWPbAAAYzRi?format=jpg&name=small" class="h-32 w-full object-cover rounded-md">
-        <p class="text-blue-600 mt-1">Shop now</p>
-    </div>
+        <p class="text-blue-600 mt-1 hover:text-red-600">Shop now</p>
+    </a>
 
-    <div class="bg-white p-4 shadow cursor-pointer hover:shadow-xl transition rounded-md"
-         onclick="window.open('https://example.com','_blank')">
-        <h2 class="font-bold mb-2">Home Essentials</h2>
+    <a href="https://example.com" target="_blank" class="category-card-link bg-white p-4 shadow hover:shadow-xl transition rounded-md">
+        <h2 class="font-bold mb-2">Home Essentials for Cats</h2>
         <img src="https://pbs.twimg.com/media/G6T92JybEAAlgVr?format=jpg&name=small" class="h-32 w-full object-cover rounded-md">
-        <p class="text-blue-600 mt-1">Explore</p>
-    </div>
+        <p class="text-blue-600 mt-1 hover:text-red-600">Explore</p>
+    </a>
 
-    <div class="bg-white p-4 shadow cursor-pointer hover:shadow-xl transition rounded-md"
-         onclick="window.open('https://example.com','_blank')">
-        <h2 class="font-bold mb-2">Fashion</h2>
+    <a href="https://example.com" target="_blank" class="category-card-link bg-white p-4 shadow rounded-md flex flex-col justify-between">
+        <h2 class="text-lg font-bold text-red-600 mb-2">Exclusive Catnip Deals!</h2>
         <img src="https://pbs.twimg.com/media/G4FRmTiXMAA-s3a?format=jpg&name=large" class="h-32 w-full object-cover rounded-md">
-        <p class="text-blue-600 mt-1">Discover</p>
-    </div>
+        <p class="text-blue-600 mt-1 hover:text-red-600">Get 50% Off</p>
+    </a>
 
-    <div class="bg-white p-4 shadow cursor-pointer hover:shadow-xl transition rounded-md"
-         onclick="window.open('https://example.com','_blank')">
-        <h2 class="font-bold mb-2">Toys</h2>
+    <a href="https://example.com" target="_blank" class="category-card-link bg-white p-4 shadow hover:shadow-xl transition rounded-md">
+        <h2 class="font-bold mb-2">Must-Have Cat Toys</h2>
         <img src="https://pbs.twimg.com/media/G6Uc-W0akAAdPr0?format=jpg&name=small" class="h-32 w-full object-cover rounded-md">
-        <p class="text-blue-600 mt-1">See more</p>
-    </div>
-
-    <div class="bg-white p-4 shadow cursor-pointer hover:shadow-xl transition rounded-md"
-         onclick="window.open('https://example.com','_blank')">
-        <h2 class="font-bold mb-2">Books</h2>
-        <img src="https://pbs.twimg.com/media/G6Uc-W0akAAdPr0?format=jpg&name=small" class="h-32 w-full object-cover rounded-md">
-        <p class="text-blue-600 mt-1">Browse</p>
-    </div>
-
-    <div class="bg-white p-4 shadow cursor-pointer hover:shadow-xl transition rounded-md"
-         onclick="window.open('https://example.com','_blank')">
-        <h2 class="font-bold mb-2">Sports</h2>
-        <img src="https://pbs.twimg.com/media/G6SKfWPbAAAYzRi?format=jpg&name=small" class="h-32 w-full object-cover rounded-md">
-        <p class="text-blue-600 mt-1">Shop</p>
-    </div>
+        <p class="text-blue-600 mt-1 hover:text-red-600">See more</p>
+    </a>
 </section>
 
 <section class="px-6 py-10">
-    <h2 class="text-2xl font-bold mb-4">Best Sellers</h2>
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6" id="productGrid"></div>
+    <h2 class="text-2xl font-bold mb-4">Today's Meow-sto Have Deals</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6" id="productGrid">
+        </div>
 </section>
 
-<footer class="bg-[#131921] text-white text-center p-4"
-        onclick="window.open('https://example.com','_blank')">© 1996-2025, Ameowzon.com, Inc. or its affiliates</footer>
+<footer class="amazon-header text-white text-center p-4 mt-10">
+    <p class="text-sm">© 1996-2025, Ameowzon.com, Inc. or its affiliates</p>
+</footer>
 
-<div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden" id="modal"
-     onclick="window.open('https://example.com','_blank')">
-    <div class="bg-white p-6 rounded-lg w-11/12 max-w-lg relative shadow-xl">
-        <span class="absolute top-2 right-3 text-2xl cursor-pointer" id="modalClose">&times;</span>
-        <img src="" id="modalImg" class="mb-4 w-full h-64 object-contain bg-gray-100 rounded-md">
-        <h3 id="modalTitle" class="text-xl font-bold mb-2"></h3>
-        <p class="text-gray-700">Product details, pricing, and full description.</p>
+<div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden" id="modal">
+    <div class="bg-white p-6 rounded-lg w-11/12 max-w-lg relative shadow-xl" onclick="event.stopPropagation()">
+        <span class="absolute top-2 right-4 text-3xl cursor-pointer text-gray-700 hover:text-black" id="modalClose">&times;</span>
+        <img src="" id="modalImg" class="mb-4 w-full h-64 object-contain bg-gray-100 rounded-md border p-2">
+        <h3 id="modalTitle" class="text-2xl font-bold mb-2"></h3>
+        <p id="modalPrice" class="text-lg text-red-600 font-bold mb-3"></p>
+        <p id="modalDesc" class="text-gray-700 mb-4">Product details, pricing, and full description will go here.</p>
+        <button class="bg-yellow-400 py-2 w-full rounded-md font-bold hover:bg-yellow-500 transition" onclick="alert('장바구니에 상품을 추가했습니다!')">
+            <i class="fa-solid fa-cart-plus mr-2"></i> Add to Cart
+        </button>
     </div>
 </div>
 
 <script>
-const products=[
-{img:'https://pbs.twimg.com/media/G5xO8jQbQAAei_H?format=png&name=small',title:'Wireless Headphones',price:'$59.99',old:'$79.99'},
-{img:'https://pbs.twimg.com/media/G6C_duXWEAIiLCy?format=jpg&name=small',title:'Smart Watch',price:'$129.99',old:'$159.99'},
-{img:'https://pbs.twimg.com/media/G55EZYPWoAA29C5?format=jpg&name=small',title:'Bluetooth Speaker',price:'$39.99',old:'$59.99'},
-{img:'https://pbs.twimg.com/media/G5rgbyVXUAAG8wi?format=jpg&name=small',title:'Gaming Mouse',price:'$29.99',old:'$49.99'},
-{img:'https://pbs.twimg.com/media/G5joR2pbQAAGU3G?format=jpg&name=small',title:'Laptop Stand',price:'$19.99',old:'$29.99'},
-{img:'https://pbs.twimg.com/media/G5id8iVbcAE7jTt?format=jpg&name=small',title:'Desk Lamp',price:'$14.99',old:'$24.99'}
-];
+    async function loadCountryName() {
+        const countryNameElement = document.getElementById('countryName');
+        try {
+            const response = await fetch('https://ipapi.co/json/');
+            const data = await response.json();
+            
+            if (data.country_name) {
+                countryNameElement.textContent = data.country_name;
+            } else {
+                countryNameElement.textContent = 'Global';
+            }
+        } catch (error) {
+            console.error('Failed to load location data:', error);
+            countryNameElement.textContent = 'Unknown';
+        }
+    }
+    loadCountryName();
 
-let grid=document.getElementById('productGrid');
-products.forEach(p=>{
-    grid.innerHTML+=`
-    <div class='bg-white p-3 rounded-md shadow hover:shadow-xl transition cursor-pointer' data-title='${p.title}' data-img='${p.img}' onclick="window.open('https://example.com','_blank')">
-        <img src='${p.img}' class='h-40 w-full object-contain mb-2 rounded-md bg-gray-100'>
-        <h3 class='font-bold text-sm mb-1'>${p.title}</h3>
-        <p class='text-gray-500 line-through text-sm'>${p.old}</p>
-        <p class='text-lg text-red-600 font-bold'>${p.price}</p>
-    </div>`;
-});
+    const mainHeaderContainer = document.getElementById('mainHeaderContainer');
+    const bottomNav = document.getElementById('bottomNav');
+    let lastScrollY = window.scrollY;
+    
+    if (lastScrollY === 0) {
+        bottomNav.classList.remove('hidden-down');
+    } else {
+        bottomNav.classList.add('hidden-down');
+    }
+
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        const scrollDelta = currentScrollY - lastScrollY;
+        
+        if (currentScrollY === 0) {
+            bottomNav.classList.remove('hidden-down');
+        } else {
+            bottomNav.classList.add('hidden-down');
+        }
+
+        if (currentScrollY <= 0) {
+            mainHeaderContainer.classList.remove('hidden-up'); 
+        } else if (scrollDelta < -5) {
+            mainHeaderContainer.classList.remove('hidden-up'); 
+        } else if (scrollDelta > 5) {
+            mainHeaderContainer.classList.add('hidden-up'); 
+        }
+
+        lastScrollY = currentScrollY;
+    });
+
+    const products = [
+        { img: 'https://pbs.twimg.com/media/G5joR2pbQAAGU3G?format=jpg&name=small', title: 'Interactive Laser Toy', price: '$14.99', old: '$19.99', desc: 'Hours of fun for your cat with an automated laser pointer.' },
+        { img: 'https://pbs.twimg.com/media/G5id8iVbcAE7jTt?format=jpg&name=small', title: 'Premium Salmon Cat Treats', price: '$9.99', old: '$12.50', desc: 'Delicious and healthy treats made with real salmon.' },
+        { img: 'https://pbs.twimg.com/media/G6SKfWPbAAAYzRi?format=jpg&name=small', title: 'Anti-Vomit Cat Bowl', price: '$24.99', old: '$30.00', desc: 'Elevated design promotes better digestion and reduces vomiting.' },
+        { img: 'https://pbs.twimg.com/media/G5xO8jQbQAAei_H?format=png&name=small', title: 'Luxury Cat Bed (Soft Fur)', price: '$59.99', old: '$79.99', desc: 'The most luxurious and softest bed for royal cats.' },
+        { img: 'https://pbs.twimg.com/media/G6C_duXWEAIiLCy?format=jpg&name=small', title: 'Automatic Pet Feeder', price: '$89.99', old: '$109.99', desc: 'Schedule meal times automatically, perfect for busy paw-rents.' },
+        { img: 'https://pbs.twimg.com/media/G55EZYPWoAA29C5?format=jpg&name=small', title: 'Scratch Post Tower XXL', price: '$129.99', old: '$159.99', desc: 'Tall and sturdy scratching tower for multiple cats.' }
+    ];
+    const productGrid = document.getElementById('productGrid');
+    const modal = document.getElementById('modal');
+    const modalClose = document.getElementById('modalClose');
+
+    function renderProducts() {
+        productGrid.innerHTML = '';
+        products.forEach(p => {
+            const productHTML = `
+                <a href="https://example.com" target="_blank" class='product-link bg-white p-3 rounded-md shadow hover:shadow-xl transition'>
+                    <img src='${p.img}' class='h-40 w-full object-contain mb-2 rounded-md bg-gray-100'>
+                    <h3 class='font-bold text-sm mb-1 line-clamp-2'>${p.title}</h3>
+                    <p class='text-gray-500 line-through text-xs'>${p.old}</p>
+                    <div class='flex items-center justify-between'>
+                        <p class='text-xl text-red-600 font-bold'>${p.price}</p>
+                        <i class="fa-solid fa-star text-yellow-400 text-xs"></i>
+                    </div>
+                </a>`;
+            productGrid.innerHTML += productHTML;
+        });
+    }
+    renderProducts();
+
+    function openModal(product) {
+        document.getElementById('modalImg').src = product.img;
+        document.getElementById('modalTitle').textContent = product.title;
+        document.getElementById('modalPrice').textContent = 'Price: ' + product.price;
+        document.getElementById('modalDesc').textContent = product.desc;
+        modal.classList.remove('hidden');
+    }
+    modalClose.addEventListener('click', () => { modal.classList.add('hidden'); });
+    modal.addEventListener('click', (e) => { if (e.target.id === 'modal') { modal.classList.add('hidden'); } });
+
+    const banners = document.querySelectorAll('.banner');
+    const prevButton = document.getElementById('prevBanner');
+    const nextButton = document.getElementById('nextBanner');
+    let currentBannerIndex = 0;
+
+    function showBanner(index) {
+        banners.forEach((banner, i) => {
+            banner.classList.remove('opacity-100');
+            banner.classList.add('opacity-0');
+            if (i === index) {
+                banner.classList.add('opacity-100');
+            }
+        });
+    }
+    
+    function nextSlide() {
+        currentBannerIndex = (currentBannerIndex + 1) % banners.length;
+        showBanner(currentBannerIndex);
+    }
+
+    prevButton.addEventListener('click', () => {
+        currentBannerIndex = (currentBannerIndex - 1 + banners.length) % banners.length;
+        showBanner(currentBannerIndex);
+    });
+
+    nextButton.addEventListener('click', nextSlide);
+    
+    setInterval(nextSlide, 5000); 
 </script>
 
 </body>

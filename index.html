@@ -1,240 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ameowzon.com. Spend less. Smile more.</title>
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <style>
-        .banner {transition: opacity 1s ease-in-out;}
-        .amazon-header {background-color: #131921;}
-        .amazon-nav {background-color: #232f3e;}
-        #mainHeaderContainer {position: sticky; top: 0; z-index: 50; transform: translateY(0); transition: transform 0.3s ease-in-out;}
-        #mainHeaderContainer.hidden-up {transform: translateY(-100%);}
-        #bottomNav {-ms-overflow-style: none; scrollbar-width: none; z-index: 40; transition: opacity 0.3s ease-in-out, visibility 0.3s, height 0.3s, padding 0.3s;}
-        #bottomNav::-webkit-scrollbar {display: none;}
-        #bottomNav.hidden-down {opacity: 0; visibility: hidden; height: 0; padding-top: 0; padding-bottom: 0;}
-        .product-link, .category-card-link {display: block; cursor: pointer;}
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ameowzon.com. Spend less. Smile more.</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<style>
+.banner {transition: opacity 1s ease-in-out;}
+.amazon-header {background-color: #131921;}
+.amazon-nav {background-color: #232f3e;}
+#mainHeaderContainer {position: sticky; top: 0; z-index: 50; transform: translateY(0); transition: transform 0.3s ease-in-out;}
+#mainHeaderContainer.hidden-up {transform: translateY(-100%);}
+#bottomNav {-ms-overflow-style: none; scrollbar-width: none; z-index: 40; transition: opacity 0.3s ease-in-out, visibility 0.3s, height 0.3s, padding 0.3s;}
+#bottomNav::-webkit-scrollbar {display: none;}
+#bottomNav.hidden-down {opacity: 0; visibility: hidden; height: 0; padding-top: 0; padding-bottom: 0;}
+.product-link, .category-card-link {display: block; cursor: pointer;}
+</style>
 </head>
-
 <body class="bg-gray-100 text-gray-900">
 
 <div id="mainHeaderContainer">
-    <header id="topHeader" class="amazon-header text-white shadow-md">
-        <div class="flex items-center p-3 gap-4 md:gap-6">
-            <a href="/" class="text-xl md:text-2xl font-bold cursor-pointer select-none">Ameowzon</a>
+<header id="topHeader" class="amazon-header text-white shadow-md">
+<div class="flex items-center p-3 gap-4 md:gap-6">
+<a href="/" class="cursor-pointer select-none flex items-center">
+<img src="logo.svg" class="w-32 md:w-40 h-auto" alt="Ameowzon Logo">
+</a>
 
-            <div class="hidden md:flex items-center cursor-pointer border border-transparent hover:border-white p-1" id="locationDisplay">
-                <i class="fa-solid fa-map-pin text-xl mr-2"></i>
-                <div class="leading-tight text-sm">
-                    <div class="text-gray-300">Deliver to</div>
-                    <div class="font-bold" id="countryName">Loading...</div>
-                </div>
-            </div>
+<div class="hidden md:flex items-center cursor-pointer border border-transparent hover:border-white p-1" id="locationDisplay">
+<i class="fa-solid fa-map-pin text-xl mr-2"></i>
+<div class="leading-tight text-sm">
+<div class="text-gray-300">Deliver to</div>
+<div class="font-bold" id="countryName">Loading...</div>
+</div>
+</div>
 
-            <div class="flex-1 flex max-w-3xl">
-                <select class="hidden md:block p-2 bg-gray-100 text-black border-r rounded-l-md text-sm hover:bg-gray-200">
-                    <option>All Cats</option>
-                    <option>Cat Food</option>
-                    <option>Cat Toys</option>
-                    <option>Cat Litter</option>
-                </select>
-                <input type="text" placeholder="Search Ameowzon" class="flex-1 p-2 text-black focus:outline-none">
-                <button class="bg-yellow-400 px-4 rounded-r-md hover:bg-yellow-500 transition">
-                    <i class="fa-solid fa-search text-[#131921]"></i>
-                </button>
-            </div>
+<div class="flex-1 flex max-w-3xl">
+<select class="hidden md:block p-2 bg-gray-100 text-black border-r rounded-l-md text-sm hover:bg-gray-200">
+<option>All Cats</option>
+<option>Cat Food</option>
+<option>Cat Toys</option>
+<option>Cat Litter</option>
+</select>
+<input type="text" placeholder="Search Ameowzon" class="flex-1 p-2 text-black focus:outline-none">
+<button class="bg-yellow-400 px-4 rounded-r-md hover:bg-yellow-500 transition">
+<i class="fa-solid fa-search text-[#131921]"></i>
+</button>
+</div>
 
-            <nav class="flex gap-3 md:gap-6 text-xs md:text-sm">
-                <a href="#" class="border border-transparent hover:border-white p-1 leading-tight">
-                    <div>Hello, sign in</div>
-                    <div class="font-bold">Account & Lists</div>
-                </a>
-                <a href="#" class="border border-transparent hover:border-white p-1 leading-tight">
-                    <div>Returns</div>
-                    <div class="font-bold">& Orders</div>
-                </a>
-                <a href="#" class="border border-transparent hover:border-white p-1 text-xl flex items-end gap-1 font-bold">
-                    <i class="fa-solid fa-shopping-bag text-2xl relative">
-                        <span id="cartCount" class="absolute -top-1 left-3 text-xs bg-yellow-400 text-black rounded-full w-4 h-4 flex items-center justify-center">0</span>
-                    </i>
-                    <span class="text-xs md:text-sm">Cart</span>
-                </a>
-            </nav>
-        </div>
-    </header>
+<nav class="flex gap-3 md:gap-6 text-xs md:text-sm">
+<a href="#" class="border border-transparent hover:border-white p-1 leading-tight">
+<div>Hello, sign in</div>
+<div class="font-bold">Account & Lists</div>
+</a>
+<a href="#" class="border border-transparent hover:border-white p-1 leading-tight">
+<div>Returns</div>
+<div class="font-bold">& Orders</div>
+</a>
+<a href="#" class="border border-transparent hover:border-white p-1 text-xl flex items-end gap-1 font-bold">
+<i class="fa-solid fa-shopping-bag text-2xl relative">
+<span id="cartCount" class="absolute -top-1 left-3 text-xs bg-yellow-400 text-black rounded-full w-4 h-4 flex items-center justify-center">0</span>
+</i>
+<span class="text-xs md:text-sm">Cart</span>
+</a>
+</nav>
+</div>
+</header>
 
-    <div id="bottomNav" class="amazon-nav text-white text-sm p-2 px-4 flex gap-4 overflow-x-auto whitespace-nowrap">
-        <div class="cursor-pointer border border-transparent hover:border-white p-1"><i class="fa-solid fa-bars mr-1"></i>All</div>
-        <div class="cursor-pointer border border-transparent hover:border-white p-1">Black Friday</div>
-        <a href="https://www.ameowzon.com/Ameowzon-Video" class="cursor-pointer border border-transparent hover:border-white p-1">Prime Video</a>
-        <div class="cursor-pointer border border-transparent hover:border-white p-1">Registry</div>
-        <div class="cursor-pointer border border-transparent hover:border-white p-1">Gift Cards</div>
-        <div class="cursor-pointer border border-transparent hover:border-white p-1">Customer Service</div>
-        <div class="cursor-pointer border border-transparent hover:border-white p-1">Sell</div>
-    </div>
+<div id="bottomNav" class="amazon-nav text-white text-sm p-2 px-4 flex gap-4 overflow-x-auto whitespace-nowrap">
+<div class="cursor-pointer border border-transparent hover:border-white p-1"><i class="fa-solid fa-bars mr-1"></i>All</div>
+<div class="cursor-pointer border border-transparent hover:border-white p-1">Black Friday</div>
+<a href="https://www.ameowzon.com/Ameowzon-Video" class="cursor-pointer border border-transparent hover:border-white p-1">Prime Video</a>
+<div class="cursor-pointer border border-transparent hover:border-white p-1">Registry</div>
+<div class="cursor-pointer border border-transparent hover:border-white p-1">Gift Cards</div>
+<div class="cursor-pointer border border-transparent hover:border-white p-1">Customer Service</div>
+<div class="cursor-pointer border border-transparent hover:border-white p-1">Sell</div>
+</div>
 </div>
 
 <div class="relative w-full h-[300px] md:h-[450px] overflow-hidden">
-    <div class="absolute inset-0 banner opacity-100" data-index="0" style="background:url('https://pbs.twimg.com/media/G5xO8jQbQAAei_H?format=png&name=small') center/cover no-repeat"></div>
-    <div class="absolute inset-0 banner opacity-0" data-index="1" style="background:url('https://pbs.twimg.com/media/G6C_duXWEAIiLCy?format=jpg&name=small') center/cover no-repeat"></div>
-    <div class="absolute inset-0 banner opacity-0" data-index="2" style="background:url('https://pbs.twimg.com/media/G55EZYPWoAA29C5?format=jpg&name=small') center/cover no-repeat"></div>
-    <div class="absolute inset-0 banner opacity-0" data-index="3" style="background:url('https://pbs.twimg.com/media/G5rgbyVXUAAG8wi?format=jpg&name=small') center/cover no-repeat"></div>
+<div class="absolute inset-0 banner opacity-100" data-index="0" style="background:url('https://pbs.twimg.com/media/G5xO8jQbQAAei_H?format=png&name=small') center/cover no-repeat"></div>
+<div class="absolute inset-0 banner opacity-0" data-index="1" style="background:url('https://pbs.twimg.com/media/G6C_duXWEAIiLCy?format=jpg&name=small') center/cover no-repeat"></div>
+<div class="absolute inset-0 banner opacity-0" data-index="2" style="background:url('https://pbs.twimg.com/media/G55EZYPWoAA29C5?format=jpg&name=small') center/cover no-repeat"></div>
+<div class="absolute inset-0 banner opacity-0" data-index="3" style="background:url('https://pbs.twimg.com/media/G5rgbyVXUAAG8wi?format=jpg&name=small') center/cover no-repeat"></div>
 
-    <button id="prevBanner" class="absolute left-0 top-0 h-full w-20 flex items-center justify-center text-white text-4xl md:text-5xl bg-black bg-opacity-20 hover:bg-opacity-40 transition z-10">‹</button>
-    <button id="nextBanner" class="absolute right-0 top-0 h-full w-20 flex items-center justify-center text-white text-4xl md:text-5xl bg-black bg-opacity-20 hover:bg-opacity-40 transition z-10">›</button>
+<button id="prevBanner" class="absolute left-0 top-0 h-full w-20 flex items-center justify-center text-white text-4xl md:text-5xl bg-black bg-opacity-20 hover:bg-opacity-40 transition z-10">‹</button>
+<button id="nextBanner" class="absolute right-0 top-0 h-full w-20 flex items-center justify-center text-white text-4xl md:text-5xl bg-black bg-opacity-20 hover:bg-opacity-40 transition z-10">›</button>
 </div>
 
 <section class="px-4 md:px-6 py-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-    <a class="category-card-link bg-white p-4 shadow hover:shadow-xl transition rounded-md">
-        <h2 class="font-bold mb-2">Pawsome Cat Food</h2>
-        <img src="https://pbs.twimg.com/media/G6SKfWPbAAAYzRi?format=jpg&name=small" class="h-28 md:h-32 w-full object-cover rounded-md">
-        <p class="text-blue-600 mt-1 hover:text-red-600">Shop now</p>
-    </a>
+<a class="category-card-link bg-white p-4 shadow hover:shadow-xl transition rounded-md">
+<h2 class="font-bold mb-2">Pawsome Cat Food</h2>
+<img src="https://pbs.twimg.com/media/G6SKfWPbAAAYzRi?format=jpg&name=small" class="h-28 md:h-32 w-full object-cover rounded-md">
+<p class="text-blue-600 mt-1 hover:text-red-600">Shop now</p>
+</a>
 
-    <a class="category-card-link bg-white p-4 shadow hover:shadow-xl transition rounded-md">
-        <h2 class="font-bold mb-2">Home Essentials</h2>
-        <img src="https://pbs.twimg.com/media/G6T92JybEAAlgVr?format=jpg&name=small" class="h-28 md:h-32 w-full object-cover rounded-md">
-        <p class="text-blue-600 mt-1 hover:text-red-600">Explore</p>
-    </a>
+<a class="category-card-link bg-white p-4 shadow hover:shadow-xl transition rounded-md">
+<h2 class="font-bold mb-2">Home Essentials</h2>
+<img src="https://pbs.twimg.com/media/G6T92JybEAAlgVr?format=jpg&name=small" class="h-28 md:h-32 w-full object-cover rounded-md">
+<p class="text-blue-600 mt-1 hover:text-red-600">Explore</p>
+</a>
 
-    <a class="category-card-link bg-white p-4 shadow hover:shadow-xl transition rounded-md">
-        <h2 class="font-bold text-red-600 mb-2">Catnip Deals</h2>
-        <img src="https://pbs.twimg.com/media/G4FRmTiXMAA-s3a?format=jpg&name=large" class="h-28 md:h-32 w-full object-cover rounded-md">
-        <p class="text-blue-600 mt-1 hover:text-red-600">50% Off</p>
-    </a>
+<a class="category-card-link bg-white p-4 shadow hover:shadow-xl transition rounded-md">
+<h2 class="font-bold text-red-600 mb-2">Catnip Deals</h2>
+<img src="https://pbs.twimg.com/media/G4FRmTiXMAA-s3a?format=jpg&name=large" class="h-28 md:h-32 w-full object-cover rounded-md">
+<p class="text-blue-600 mt-1 hover:text-red-600">50% Off</p>
+</a>
 
-    <a class="category-card-link bg-white p-4 shadow hover:shadow-xl transition rounded-md">
-        <h2 class="font-bold mb-2">Must-Have Toys</h2>
-        <img src="https://pbs.twimg.com/media/G6Uc-W0akAAdPr0?format=jpg&name=small" class="h-28 md:h-32 w-full object-cover rounded-md">
-        <p class="text-blue-600 mt-1 hover:text-red-600">See more</p>
-    </a>
+<a class="category-card-link bg-white p-4 shadow hover:shadow-xl transition rounded-md">
+<h2 class="font-bold mb-2">Must-Have Toys</h2>
+<img src="https://pbs.twimg.com/media/G6Uc-W0akAAdPr0?format=jpg&name=small" class="h-28 md:h-32 w-full object-cover rounded-md">
+<p class="text-blue-600 mt-1 hover:text-red-600">See more</p>
+</a>
 </section>
 
 <section class="px-4 md:px-6 py-10">
-    <h2 class="text-2xl font-bold mb-4">Today's Meow-st Have Deals</h2>
-    <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6"></div>
+<h2 class="text-2xl font-bold mb-4">Today's Meow-st Have Deals</h2>
+<div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6"></div>
 </section>
 
 <footer class="amazon-header text-white text-center p-4 mt-10">
-    <p class="text-sm">© 1996-2025, Ameowzon.com, Inc.</p>
+<p class="text-sm">© 1996-2025, Ameowzon.com, Inc.</p>
 </footer>
 
 <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
-    <div class="bg-white p-6 rounded-lg w-11/12 max-w-lg relative shadow-xl" onclick="event.stopPropagation()">
-        <span id="modalClose" class="absolute top-2 right-4 text-3xl cursor-pointer">&times;</span>
-        <img id="modalImg" class="mb-4 w-full h-64 object-contain bg-gray-100 rounded-md border p-2">
-        <h3 id="modalTitle" class="text-2xl font-bold mb-2"></h3>
-        <p id="modalPrice" class="text-lg text-red-600 font-bold mb-3"></p>
-        <p id="modalDesc" class="text-gray-700 mb-4"></p>
-        <button class="bg-yellow-400 py-2 w-full rounded-md font-bold hover:bg-yellow-500 transition">
-            <i class="fa-solid fa-cart-plus mr-2"></i>Add to Cart
-        </button>
-    </div>
+<div class="bg-white p-6 rounded-lg w-11/12 max-w-lg relative shadow-xl" onclick="event.stopPropagation()">
+<span id="modalClose" class="absolute top-2 right-4 text-3xl cursor-pointer">&times;</span>
+<img id="modalImg" class="mb-4 w-full h-64 object-contain bg-gray-100 rounded-md border p-2">
+<h3 id="modalTitle" class="text-2xl font-bold mb-2"></h3>
+<p id="modalPrice" class="text-lg text-red-600 font-bold mb-3"></p>
+<p id="modalDesc" class="text-gray-700 mb-4"></p>
+<button class="bg-yellow-400 py-2 w-full rounded-md font-bold hover:bg-yellow-500 transition">
+<i class="fa-solid fa-cart-plus mr-2"></i>Add to Cart
+</button>
+</div>
 </div>
 
 <script>
-    async function loadCountryName() {
-        const el = document.getElementById('countryName');
-        try {
-            const res = await fetch('https://ipapi.co/json/');
-            const data = await res.json();
-            el.textContent = data.country_name || 'Global';
-        } catch {
-            el.textContent = 'Unknown';
-        }
-    }
-    loadCountryName();
+async function loadCountryName() {
+const el = document.getElementById('countryName');
+try { const res = await fetch('https://ipapi.co/json/'); const data = await res.json(); el.textContent = data.country_name || 'Global'; }
+catch { el.textContent = 'Unknown'; } }
+loadCountryName();
 
-    const mainHeaderContainer = document.getElementById('mainHeaderContainer');
-    const bottomNav = document.getElementById('bottomNav');
-    let lastScrollY = window.scrollY;
+const mainHeaderContainer = document.getElementById('mainHeaderContainer');
+const bottomNav = document.getElementById('bottomNav');
+let lastScrollY = window.scrollY;
 
-    if (lastScrollY === 0) bottomNav.classList.remove('hidden-down');
-    else bottomNav.classList.add('hidden-down');
+if (lastScrollY === 0) bottomNav.classList.remove('hidden-down');
+else bottomNav.classList.add('hidden-down');
 
-    window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY;
-        const delta = currentScrollY - lastScrollY;
+window.addEventListener('scroll', () => {
+const currentScrollY = window.scrollY;
+const delta = currentScrollY - lastScrollY;
+if (currentScrollY === 0) bottomNav.classList.remove('hidden-down');
+else bottomNav.classList.add('hidden-down');
+if (currentScrollY <= 0) mainHeaderContainer.classList.remove('hidden-up');
+else if (delta < -5) mainHeaderContainer.classList.remove('hidden-up');
+else if (delta > 5) mainHeaderContainer.classList.add('hidden-up');
+lastScrollY = currentScrollY;
+});
 
-        if (currentScrollY === 0) bottomNav.classList.remove('hidden-down');
-        else bottomNav.classList.add('hidden-down');
+const products = [
+{ img:'https://pbs.twimg.com/media/G5joR2pbQAAGU3G?format=jpg&name=small', title:'Interactive Laser Toy', price:'$14.99', old:'$19.99', desc:'Automated laser toy for endless cat fun.' },
+{ img:'https://pbs.twimg.com/media/G5id8iVbcAE7jTt?format=jpg&name=small', title:'Premium Salmon Treats', price:'$9.99', old:'$12.50', desc:'Healthy treats made with real salmon.' },
+{ img:'https://pbs.twimg.com/media/G6SKfWPbAAAYzRi?format=jpg&name=small', title:'Anti-Vomit Cat Bowl', price:'$24.99', old:'$30.00', desc:'Ergonomic bowl that reduces vomiting.' },
+{ img:'https://pbs.twimg.com/media/G5xO8jQbQAAei_H?format=png&name=small', title:'Luxury Cat Bed', price:'$59.99', old:'$79.99', desc:'Soft and luxurious premium cat bed.' },
+{ img:'https://pbs.twimg.com/media/G6C_duXWEAIiLCy?format=jpg&name=small', title:'Automatic Pet Feeder', price:'$89.99', old:'$109.99', desc:'Automated meal scheduling system.' },
+{ img:'https://pbs.twimg.com/media/G55EZYPWoAA29C5?format=jpg&name=small', title:'XXL Scratch Tower', price:'$129.99', old:'$159.99', desc:'Large scratching tower for multiple cats.' }
+];
 
-        if (currentScrollY <= 0) mainHeaderContainer.classList.remove('hidden-up');
-        else if (delta < -5) mainHeaderContainer.classList.remove('hidden-up');
-        else if (delta > 5) mainHeaderContainer.classList.add('hidden-up');
+const grid = document.getElementById('productGrid');
+function renderProducts() {
+grid.innerHTML = '';
+products.forEach((p, i) => {
+grid.innerHTML += `
+<div class='product-link bg-white p-3 rounded-md shadow hover:shadow-xl transition' onclick="openModal(${i})">
+<img src='${p.img}' class='h-40 w-full object-contain mb-2 rounded-md bg-gray-100'>
+<h3 class='font-bold text-sm mb-1 line-clamp-2'>${p.title}</h3>
+<p class='text-gray-500 line-through text-xs'>${p.old}</p>
+<div class='flex items-center justify-between'>
+<p class='text-xl text-red-600 font-bold'>${p.price}</p>
+<i class="fa-solid fa-star text-yellow-400 text-xs"></i>
+</div>
+</div>`;
+});
+}
+renderProducts();
 
-        lastScrollY = currentScrollY;
-    });
+const modal = document.getElementById('modal');
+const modalClose = document.getElementById('modalClose');
+function openModal(index) {
+const p = products[index];
+document.getElementById('modalImg').src = p.img;
+document.getElementById('modalTitle').textContent = p.title;
+document.getElementById('modalPrice').textContent = 'Price: ' + p.price;
+document.getElementById('modalDesc').textContent = p.desc;
+modal.classList.remove('hidden');
+}
+modalClose.onclick = () => modal.classList.add('hidden');
+modal.onclick = e => { if (e.target.id === 'modal') modal.classList.add('hidden'); };
 
-    const products = [
-        { img:'https://pbs.twimg.com/media/G5joR2pbQAAGU3G?format=jpg&name=small', title:'Interactive Laser Toy', price:'$14.99', old:'$19.99', desc:'Automated laser toy for endless cat fun.' },
-        { img:'https://pbs.twimg.com/media/G5id8iVbcAE7jTt?format=jpg&name=small', title:'Premium Salmon Treats', price:'$9.99', old:'$12.50', desc:'Healthy treats made with real salmon.' },
-        { img:'https://pbs.twimg.com/media/G6SKfWPbAAAYzRi?format=jpg&name=small', title:'Anti-Vomit Cat Bowl', price:'$24.99', old:'$30.00', desc:'Ergonomic bowl that reduces vomiting.' },
-        { img:'https://pbs.twimg.com/media/G5xO8jQbQAAei_H?format=png&name=small', title:'Luxury Cat Bed', price:'$59.99', old:'$79.99', desc:'Soft and luxurious premium cat bed.' },
-        { img:'https://pbs.twimg.com/media/G6C_duXWEAIiLCy?format=jpg&name=small', title:'Automatic Pet Feeder', price:'$89.99', old:'$109.99', desc:'Automated meal scheduling system.' },
-        { img:'https://pbs.twimg.com/media/G55EZYPWoAA29C5?format=jpg&name=small', title:'XXL Scratch Tower', price:'$129.99', old:'$159.99', desc:'Large scratching tower for multiple cats.' }
-    ];
-
-    const grid = document.getElementById('productGrid');
-    function renderProducts() {
-        grid.innerHTML = '';
-        products.forEach((p, i) => {
-            grid.innerHTML += `
-                <div class='product-link bg-white p-3 rounded-md shadow hover:shadow-xl transition' onclick="openModal(${i})">
-                    <img src='${p.img}' class='h-40 w-full object-contain mb-2 rounded-md bg-gray-100'>
-                    <h3 class='font-bold text-sm mb-1 line-clamp-2'>${p.title}</h3>
-                    <p class='text-gray-500 line-through text-xs'>${p.old}</p>
-                    <div class='flex items-center justify-between'>
-                        <p class='text-xl text-red-600 font-bold'>${p.price}</p>
-                        <i class="fa-solid fa-star text-yellow-400 text-xs"></i>
-                    </div>
-                </div>`;
-        });
-    }
-    renderProducts();
-
-    const modal = document.getElementById('modal');
-    const modalClose = document.getElementById('modalClose');
-
-    function openModal(index) {
-        const p = products[index];
-        document.getElementById('modalImg').src = p.img;
-        document.getElementById('modalTitle').textContent = p.title;
-        document.getElementById('modalPrice').textContent = 'Price: ' + p.price;
-        document.getElementById('modalDesc').textContent = p.desc;
-        modal.classList.remove('hidden');
-    }
-
-    modalClose.onclick = () => modal.classList.add('hidden');
-    modal.onclick = e => { if (e.target.id === 'modal') modal.classList.add('hidden'); };
-
-    const banners = document.querySelectorAll('.banner');
-    let currentBannerIndex = 0;
-
-    function showBanner(i) {
-        banners.forEach((b, idx) => {
-            b.classList.remove('opacity-100');
-            b.classList.add('opacity-0');
-            if (idx === i) b.classList.add('opacity-100');
-        });
-    }
-
-    function nextSlide() {
-        currentBannerIndex = (currentBannerIndex + 1) % banners.length;
-        showBanner(currentBannerIndex);
-    }
-
-    document.getElementById('prevBanner').onclick = () => {
-        currentBannerIndex = (currentBannerIndex - 1 + banners.length) % banners.length;
-        showBanner(currentBannerIndex);
-    };
-
-    document.getElementById('nextBanner').onclick = nextSlide;
-    setInterval(nextSlide, 5000);
+const banners = document.querySelectorAll('.banner');
+let currentBannerIndex = 0;
+function showBanner(i) {
+banners.forEach((b, idx) => {
+b.classList.remove('opacity-100');
+b.classList.add('opacity-0');
+if (idx === i) b.classList.add('opacity-100');
+});
+}
+function nextSlide() {
+currentBannerIndex = (currentBannerIndex + 1) % banners.length;
+showBanner(currentBannerIndex);
+}
+document.getElementById('prevBanner').onclick = () => {
+currentBannerIndex = (currentBannerIndex - 1 + banners.length) % banners.length;
+showBanner(currentBannerIndex);
+};
+document.getElementById('nextBanner').onclick = nextSlide;
+setInterval(nextSlide, 5000);
 </script>
 
 </body>
